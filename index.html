@@ -480,40 +480,179 @@
             }
         }
 
-        .modal-content input[type="checkbox"] {
-            accent-color: #ff7eb6;
-            margin-right: 10px;
-            transform: scale(1.15);
+.envelope-container {
+            position: relative;
+            perspective: 1000px; /* Mantém o efeito 3D */
         }
 
-        .modal-content label {
-            cursor: not-allowed;
-            color: #f3e8f9;
+        .envelope {
+            position: relative;
+            width: 320px;
+            height: 240px;
+            margin-top: 50px;
         }
 
-@media (max-width: 768px){
+        .envelope-back {
+            position: absolute;
+            inset: 0;
+            background: #ffb6d9;
+            border-radius: 8px;
+        }
 
-    .modal{
-        align-items:flex-start;
-        padding:15px;
-        overflow-y:auto;
-    }
+        .envelope-front {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: #ff8ec7;
+            clip-path: polygon(0 40%, 50% 85%, 100% 40%, 100% 100%, 0 100%);
+            z-index: 4; /* Fica na frente da carta e da aba fechada */
+        }
 
-    .modal-content{
-        margin-top:15px;
-        padding:20px;
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 50%;
+            background: #ffc4df;
+            transform-origin: top;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
 
-        max-height: 90h;
-        overflow-y:auto;
+            /* --- ESTADO INICIAL: Totalmente fechado --- */
+            transform: rotateX(0deg);
+            z-index: 5; /* Começa no topo de tudo, cobrindo a abertura */
 
-        -webkit-overflow-scrolling:touch;
-    }
+            /* Animação dura 1.2s e começa após 1s do load */
+            animation: openFlap 1.2s ease-in-out forwards;
+            animation-delay: 1s;
+        }
 
-}
+        .letter {
+            position: absolute;
+            left: 5%;
+            width: 90%;
+            height: 200px;
+            background: white;
+            color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+            /* --- CORREÇÃO DA VISIBILIDADE INICIAL --- */
+            z-index: 2; /* Começa atrás da face frontal (z-index: 4) */
+            /* Esconde a carta totalmente lá embaixo dentro do envelope */
+            transform: translateY(30px) scale(0.9);
+            opacity: 0; /* Começa invisível para não vazar pelas frestas */
+
+            /* O delay DEVE ser a soma do delay da aba + a duração dela (1s + 1.2s = 2.2s) */
+            animation: riseLetter 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 2.2s;
+        }
+
+        .letter h2 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: #ff5c8a;
+        }
+
+        .letter p {
+            margin-bottom: 8px;
+            line-height: 1.4;
+            font-size: 0.85rem;
+        }
+
+        @keyframes openFlap {
+            0% {
+                transform: rotateX(0deg);
+                z-index: 5;
+            }
+            49% {
+                z-index: 5;
+            }
+            50% {
+                z-index: 1;
+            }
+            100% {
+                transform: rotateX(180deg);
+                z-index: 1;
+            }
+        }
+
+        @keyframes riseLetter {
+            0% {
+                transform: translateY(30px) scale(0.9);
+                opacity: 0;
+                z-index: 2;
+            }
+            15% {
+                opacity: 1;
+            }
+            50% {
+
+                z-index: 6;
+            }
+            100% {
+                transform: translateY(-140px) scale(1.05);
+                opacity: 1;
+                z-index: 6;
+            }
+        }
+
+        #intro {
+            position: fixed;
+            inset: 0;
+            background: #160b19;
+            z-index: 999999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            animation: fadeOutIntro 1s ease forwards;
+            animation-delay: 6.5s;
+        }
+
+        @keyframes fadeOutIntro {
+            to {
+                opacity: 0;
+                pointer-events: none;
+                visibility: hidden;
+            }
+        }
     </style>
 </head>
 
 <body>
+
+    <div id="intro">
+
+        <div class="envelope-container">
+
+            <div class="intro-text" style="text-align:center">
+                Você recebeu uma nova mensagem...
+            </div>
+
+            <div class="envelope">
+
+                <div class="letter">
+                    <h2>Oi gatinha rsrsr</h2>
+                    <p>
+                        Parece que você está demorando um pouco
+                        para responder as mensagens...
+                    </p>
+                    <p>
+                        Então resolvi criar uma solução alternativa.
+                    </p>
+                </div>
+
+                <div class="envelope-back"></div>
+                <div class="envelope-front"></div>
+                <div class="envelope-flap"></div>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <section class="hero">
         <div class="container">
@@ -1058,7 +1197,7 @@
         color:#ffd6e8;
         font-size:.95rem;
     ">
-                ⚠️ Ao clicar em "Aceitar e Continuar", você concorda em considerar
+                ⚠️ Ao clicar em "Aceitar e Continuar", a gatinha concorda em considerar
                 seriamente a possibilidade de um datezinho no parque.
             </div>
 
@@ -1227,7 +1366,20 @@ Agora só precisamos decidir o dia!
         }
 
         setInterval(criarCoracaoFlutuante, 700);
+        setTimeout(() => {
 
+            document.getElementById('intro').style.transition =
+                'opacity .8s ease';
+
+            document.getElementById('intro').style.opacity = '0';
+
+            setTimeout(() => {
+
+                document.getElementById('intro').remove();
+
+            }, 800);
+
+        }, 5500);
         console.error("Falha crítica: Usuário desenvolvedor criou um site inteiro ao invés de simplesmente chamar para sair.");
         console.error("ERRO FATAL: Botão 'Não' removido por motivos de segurança.");
         console.log("Se você chegou até aqui, já temos algo em comum: curiosidade.");
