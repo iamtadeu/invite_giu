@@ -480,9 +480,10 @@
             }
         }
 
-.envelope-container {
+        .envelope-container {
             position: relative;
-            perspective: 1000px; /* Mantém o efeito 3D */
+            perspective: 1000px;
+            /* Mantém o efeito 3D */
         }
 
         .envelope {
@@ -506,7 +507,8 @@
             height: 100%;
             background: #ff8ec7;
             clip-path: polygon(0 40%, 50% 85%, 100% 40%, 100% 100%, 0 100%);
-            z-index: 4; /* Fica na frente da carta e da aba fechada */
+            z-index: 4;
+            /* Fica na frente da carta e da aba fechada */
         }
 
         .envelope-flap {
@@ -520,7 +522,8 @@
 
             /* --- ESTADO INICIAL: Totalmente fechado --- */
             transform: rotateX(0deg);
-            z-index: 5; /* Começa no topo de tudo, cobrindo a abertura */
+            z-index: 5;
+            /* Começa no topo de tudo, cobrindo a abertura */
 
             /* Animação dura 1.2s e começa após 1s do load */
             animation: openFlap 1.2s ease-in-out forwards;
@@ -536,13 +539,15 @@
             color: #333;
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 
             /* --- CORREÇÃO DA VISIBILIDADE INICIAL --- */
-            z-index: 2; /* Começa atrás da face frontal (z-index: 4) */
+            z-index: 2;
+            /* Começa atrás da face frontal (z-index: 4) */
             /* Esconde a carta totalmente lá embaixo dentro do envelope */
             transform: translateY(30px) scale(0.9);
-            opacity: 0; /* Começa invisível para não vazar pelas frestas */
+            opacity: 0;
+            /* Começa invisível para não vazar pelas frestas */
 
             /* O delay DEVE ser a soma do delay da aba + a duração dela (1s + 1.2s = 2.2s) */
             animation: riseLetter 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
@@ -566,12 +571,15 @@
                 transform: rotateX(0deg);
                 z-index: 5;
             }
+
             49% {
                 z-index: 5;
             }
+
             50% {
                 z-index: 1;
             }
+
             100% {
                 transform: rotateX(180deg);
                 z-index: 1;
@@ -584,13 +592,16 @@
                 opacity: 0;
                 z-index: 2;
             }
+
             15% {
                 opacity: 1;
             }
+
             50% {
 
                 z-index: 6;
             }
+
             100% {
                 transform: translateY(-140px) scale(1.05);
                 opacity: 1;
@@ -617,6 +628,26 @@
                 pointer-events: none;
                 visibility: hidden;
             }
+        }
+
+        @media (max-width: 768px) {
+
+            .modal {
+                align-items: flex-start;
+                padding: 15px;
+                overflow-y: auto;
+            }
+
+            .modal-content {
+                margin-top: 15px;
+                padding: 20px;
+
+                max-height: 90vh;
+                overflow-y: auto;
+
+                -webkit-overflow-scrolling: touch;
+            }
+
         }
     </style>
 </head>
