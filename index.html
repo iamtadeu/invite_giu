@@ -22,45 +22,64 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #0f172a;
-            color: white;
+            background:
+                radial-gradient(circle at top,
+                    #44204f 0%,
+                    #2a1533 40%,
+                    #160b19 100%);
+            color: #ffffff;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+
+            background-image:
+                radial-gradient(rgba(255, 182, 193, .12) 2px,
+                    transparent 2px);
+
+            background-size: 80px 80px;
+            opacity: .5;
         }
 
         .container {
             width: 90%;
             max-width: 1100px;
             margin: auto;
+            text-align: center;
         }
 
         .hero {
-            /* min-height:100vh; */
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 40px 40px 5px 40px;
+            padding: 60px 40px 20px;
         }
 
         .hero h1 {
             font-size: clamp(3rem, 8vw, 6rem);
-            background: linear-gradient(90deg, #38bdf8, #818cf8);
+
+            background: linear-gradient(90deg,
+                    #ff8ec7,
+                    #ffb3d9,
+                    #d8a8ff);
+
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+
+            text-shadow:
+                0 0 30px rgba(255, 182, 193, .25);
         }
 
         .hero p {
-            color: #cbd5e1;
+            color: #ecdff1;
             margin-top: 20px;
             font-size: 1.2rem;
-        }
-
-        .card {
-            background: #1e293b;
-            border: 1px solid rgba(255, 255, 255, .08);
-            border-radius: 24px;
-            padding: 35px;
-            margin: 25px 0;
         }
 
         .section {
@@ -70,6 +89,32 @@
         .section h2 {
             margin-bottom: 25px;
             font-size: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, .04);
+
+            backdrop-filter: blur(14px);
+
+            border: 1px solid rgba(255, 182, 193, .12);
+
+            border-radius: 24px;
+
+            padding: 35px;
+
+            margin: 25px 0;
+
+            box-shadow:
+                0 12px 40px rgba(255, 105, 180, .08);
+
+            transition: .3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 18px 50px rgba(255, 105, 180, .12);
         }
 
         .status {
@@ -97,7 +142,7 @@
 
         .status-item:nth-child(4) {
             animation-delay: 4s;
-            color: #ef4444;
+            color: #ff8da1;
         }
 
         @keyframes show {
@@ -114,19 +159,30 @@
         }
 
         .stat {
-            background: #334155;
+            background: rgba(255, 255, 255, .05);
+
+            border: 1px solid rgba(255, 182, 193, .08);
+
             border-radius: 18px;
+
             padding: 25px;
+
+            transition: .3s;
+        }
+
+        .stat:hover {
+            transform: translateY(-4px);
         }
 
         .stat h3 {
-            color: #93c5fd;
+            color: #ffc4df;
             margin-bottom: 10px;
         }
 
         .timeline {
             position: relative;
             padding-left: 30px;
+            text-align: left;
         }
 
         .timeline::before {
@@ -136,7 +192,10 @@
             top: 0;
             bottom: 0;
             width: 3px;
-            background: #475569;
+
+            background: linear-gradient(to bottom,
+                    #ff8ec7,
+                    #d8a8ff);
         }
 
         .event {
@@ -151,23 +210,35 @@
             top: 8px;
             width: 14px;
             height: 14px;
-            background: #60a5fa;
+
+            background: #ff9ecd;
+
             border-radius: 50%;
+
+            box-shadow:
+                0 0 15px rgba(255, 158, 205, .8);
         }
 
         .event span {
-            color: #94a3b8;
+            color: #cbb8d3;
             font-size: .9rem;
         }
 
         .terminal {
-            background: #020617;
+            background: rgba(0, 0, 0, .25);
+
             border-radius: 18px;
+
             padding: 25px;
+
             min-height: 240px;
+
             font-family: monospace;
-            color: #22c55e;
+
+            color: #ffb6d9;
+
             white-space: pre-line;
+
             border: 1px solid rgba(255, 255, 255, .08);
         }
 
@@ -175,47 +246,67 @@
             text-align: center;
         }
 
-        .btn {
-            background: #3b82f6;
+        .btn,
+        .btn-large {
+
+            background: linear-gradient(135deg,
+                    #ff7eb6,
+                    #d88cff);
+
             color: white;
+
             border: none;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .btn {
             border-radius: 12px;
             padding: 15px 30px;
-            cursor: pointer;
             font-size: 1rem;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-large{
-            background: #3b82f6;
-            border-radius: 12px;
+        .btn-large {
+            border-radius: 16px;
             padding: 20px 40px;
             font-size: 1.2rem;
-            cursor: pointer;
-            color: white;
-            border: none;
         }
+
+        .btn:hover,
         .btn-large:hover {
+
             transform: translateY(-3px);
+
+            box-shadow:
+                0 8px 25px rgba(255, 126, 182, .35);
         }
+
         .progress {
             margin-top: 25px;
             width: 100%;
             max-width: 500px;
             height: 30px;
-            background: #334155;
-            border-radius: 50px;
+
+            background: rgba(255, 255, 255, .08);
+
+            border-radius: 999px;
+
             overflow: hidden;
+
             margin-inline: auto;
         }
 
         .bar {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #38bdf8, #818cf8);
+
+            background: linear-gradient(90deg,
+                    #ff7eb6,
+                    #ffb6d9,
+                    #d88cff);
+
             transition: width 1s;
         }
 
@@ -231,33 +322,65 @@
 
         .final h2 {
             font-size: clamp(2rem, 5vw, 4rem);
+
             margin-bottom: 20px;
+
+            background: linear-gradient(90deg,
+                    #ffb3d9,
+                    #d8a8ff);
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .final p {
-            color: #cbd5e1;
+            color: #ecdff1;
+
             line-height: 1.8;
+
             max-width: 700px;
+
             margin: auto;
         }
 
         .modal {
             position: fixed;
             inset: 0;
+
             background: rgba(0, 0, 0, .85);
+
             display: none;
+
             justify-content: center;
             align-items: center;
+
             padding: 20px;
+
+            backdrop-filter: blur(10px);
         }
 
         .modal-content {
-            background: #1e293b;
+
+            background:
+                linear-gradient(180deg,
+                    #31173a,
+                    #1d1025);
+
             padding: 40px;
+
             border-radius: 24px;
+
             max-width: 650px;
+
             width: 100%;
+
             text-align: center;
+
+            border:
+                1px solid rgba(255, 182, 193, .2);
+
+            box-shadow:
+                0 20px 60px rgba(255, 105, 180, .15);
         }
 
         .buttons {
@@ -269,18 +392,23 @@
         }
 
         .yes {
-            background: #22c55e;
+            background: linear-gradient(135deg,
+                    #ff7eb6,
+                    #ff9fc8);
         }
 
         .no {
-            background: #ef4444;
+            background: linear-gradient(135deg,
+                    #ff5c8a,
+                    #ff7ba3);
+
             position: relative;
         }
 
         footer {
             padding: 40px;
             text-align: center;
-            color: #64748b;
+            color: #bda9c5;
         }
 
         .heart {
@@ -300,6 +428,68 @@
                 transform: translateY(-300px);
             }
         }
+
+        iframe {
+            border-radius: 18px;
+            box-shadow:
+                0 15px 40px rgba(255, 105, 180, .15);
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #241128;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#ff7eb6,
+                    #d88cff);
+            border-radius: 999px;
+        }
+
+
+        .floating-heart {
+            position: fixed;
+            bottom: -50px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            animation: floatHeart linear forwards;
+            z-index: 9999;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: .7;
+            }
+
+            90% {
+                opacity: .7;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .modal-content input[type="checkbox"] {
+            accent-color: #ff7eb6;
+            margin-right: 10px;
+            transform: scale(1.15);
+        }
+
+        .modal-content label {
+            cursor: not-allowed;
+            color: #f3e8f9;
+        }
     </style>
 </head>
 
@@ -314,7 +504,7 @@
         </div>
     </section>
 
-    <section class="section">
+    <!-- <section class="section">
         <div class="container">
 
             <div class="card">
@@ -330,18 +520,18 @@
 
             </div>
         </div>
-    </section>
+    </section> -->
 
     <section class="section">
         <div class="container">
 
-            <h2>📊 Estatísticas Oficiais</h2>
+            <h2>Estatísticas Oficiais</h2>
 
             <div class="stats">
 
                 <div class="stat">
                     <h3>Tempo médio para resposta</h3>
-                    <p>4 a 7 dias úteis</p>
+                    <p>2 a ??? dias úteis</p>
                 </div>
 
                 <div class="stat">
@@ -354,10 +544,10 @@
                     <p>Estamos investigando</p>
                 </div>
 
-                <div class="stat">
+                <!-- <div class="stat">
                     <h3>Taxa de ansiedade gerada</h3>
                     <p>Elevadíssima</p>
-                </div>
+                </div> -->
 
             </div>
 
@@ -367,7 +557,7 @@
     <section class="section">
         <div class="container">
 
-            <h2>🕒 Linha do Tempo de uma Mensagem</h2>
+            <h2>Linha do Tempo de uma Mensagem</h2>
 
             <div class="card">
 
@@ -418,7 +608,7 @@
     <section class="section">
         <div class="container">
 
-            <h2>🧪 Simulador de Resposta</h2>
+            <h2>Simulador de Resposta</h2>
 
             <div class="card simulator">
 
@@ -439,15 +629,15 @@
         </div>
     </section>
 
-    <section class="section">
+    <!-- <section class="section">
         <div class="container">
 
-            <h2>💻 Log do Sistema</h2>
+            <h2>Log do Sistema</h2>
 
             <div class="terminal" id="terminal"></div>
 
         </div>
-    </section>
+    </section> -->
 
     <section class="section final">
 
@@ -459,18 +649,18 @@
                 Após extensos testes e observações científicas,
                 o sistema concluiu que a Giullia realmente responde.
                 <br><br>
-                Só não necessariamente na mesma semana.
+                Só não necessariamente na mesma semana rsrsrs.
                 <br><br>
                 Por esse motivo, nossa equipe técnica sugere uma solução mais eficiente:
             </p>
 
-            <h2 style="margin-top:40px;">Encontro em um parque!</h2>
+            <h2 style="margin-top:40px;">Datezinho em um parque!</h2>
 
             <iframe
                 src="https://maps.google.com/maps?q=Parque%20do%20Por%20do%20Sol%20Sao%20Paulo&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 width="65%" height="450" style="border-radius:12px;" allowfullscreen="" loading="lazy">
             </iframe>
-
+            <!--
             <div style="
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -567,14 +757,14 @@
 
 
 
-            </div>
+            </div> -->
 
             <section class="section">
 
                 <div class="container">
 
                     <h2 style="text-align:center;margin-bottom:40px;">
-                        🚀 Possíveis Atividades
+                        Possíveis atividades
                     </h2>
 
                     <p style="
@@ -589,17 +779,132 @@
                         as chances de uma tarde agradável.
                     </p>
 
-                    <div style="
-        display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-        gap:20px;
+
+                    <div class="card">
+
+                        <h3 style="margin-bottom:30px;">
+                            Planejamento Estratégico do Date
+                        </h3>
+
+                        <div style="
+    position:relative;
+    padding-left:30px;
+">
+
+                            <div style="
+        position:absolute;
+        left:12px;
+        top:0;
+        bottom:0;
+        width:2px;
+        background:rgba(255,255,255,.15);
+    "></div>
+
+                            <div style="
+        position:relative;
+        margin-bottom:30px;
+    ">
+                                <div style="
+            position:absolute;
+            left:-24px;
+            top:4px;
+            width:28px;
+            height:28px;
+            border-radius:50%;
+            background:#ff8ec7;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-weight:bold;
+            color:#fff;
         ">
+                                    1
+                                </div>
+
+                                <h4>Parque</h4>
+
+                                <p style="color:#d8cbe0;margin-top:8px;">
+                                    Conversar, caminhar e finalmente descobrir como é interagir sem emojis, figurinhas
+                                    ou tempo infinito para pensar na resposta.
+                                </p>
+                            </div>
+
+                            <div style="
+        position:relative;
+        margin-bottom:30px;
+    ">
+                                <div style="
+            position:absolute;
+            left:-24px;
+            top:4px;
+            width:28px;
+            height:28px;
+            border-radius:50%;
+            background:#ff8ec7;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-weight:bold;
+            color:#fff;
+        ">
+                                    2
+                                </div>
+
+                                <h4>Pôr do Sol</h4>
+
+                                <p style="color:#d8cbe0;margin-top:8px;">
+                                    Momento oficialmente aprovado para fotos bonitas, comentários profundos e fingir que
+                                    tudo foi planejado.
+                                </p>
+                            </div>
+
+                            <div style="
+        position:relative;
+    ">
+                                <div style="
+            position:absolute;
+            left:-24px;
+            top:4px;
+            width:28px;
+            height:28px;
+            border-radius:50%;
+            background:#ff8ec7;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-weight:bold;
+            color:#fff;
+        ">
+                                    3
+                                </div>
+
+                                <h4>Jantar</h4>
+
+                                <p style="color:#d8cbe0;margin-top:8px;">
+                                    Após o parque, partimos para algum lugar legal para comer, porque conversar é ótimo,
+                                    mas conversar com comida é claramente melhor.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div style="
+                            display:grid;
+                            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+                            gap:20px;
+                            ">
 
                         <div class="card">
                             <div style="font-size:2rem;">☕</div>
                             <h3 style="margin-top:15px;">Tomar um café</h3>
                             <p>
-                                A atividade oficialmente recomendada pelo algoritmo.
+                                Alguns passam pelo sistema digestivo de animais antes de serem consumidos.
+
+                                Felizmente, a proposta atual é apenas tomar um café normal.
                             </p>
                         </div>
 
@@ -615,7 +920,8 @@
                             <div style="font-size:2rem;">🚶</div>
                             <h3 style="margin-top:15px;">Caminhar pelo parque</h3>
                             <p>
-                                Excelente para conversar sem perceber o tempo passar.
+                                Método cientificamente comprovado para manter uma conversa fluindo e disfarçar o
+                                nervosismo com movimento constante.
                             </p>
                         </div>
 
@@ -623,23 +929,31 @@
                             <div style="font-size:2rem;">📸</div>
                             <h3 style="margin-top:15px;">Tirar fotos</h3>
                             <p>
-                                Porque um pôr do sol bonito merece registro.
+                                Porque se o encontro der certo, vamos precisar de evidências. Se der errado, nunca
+                                aconteceu.
                             </p>
                         </div>
 
-                        <div class="card">
+                        <!-- <div class="card">
                             <div style="font-size:2rem;">😂</div>
                             <h3 style="margin-top:15px;">Trocar histórias</h3>
                             <p>
                                 Especialmente as vergonhosas. São as melhores.
                             </p>
-                        </div>
+                        </div> -->
 
                         <div class="card">
                             <div style="font-size:2rem;">🎲</div>
                             <h3 style="margin-top:15px;">Improvisar</h3>
                             <p>
                                 Afinal, os melhores momentos geralmente não estavam no planejamento.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <div style="font-size:2rem;">?</div>
+                            <h3 style="margin-top:15px;">???</h3>
+                            <p>
+                                ???????????
                             </p>
                         </div>
 
@@ -652,7 +966,7 @@
             <br>
 
             <button class="btn-large" onclick="abrirModal()">
-                Aceitar atualização
+                Aceitar convite
             </button>
 
         </div>
@@ -666,27 +980,76 @@
     <div class="modal" id="modal">
 
         <div class="modal-content">
+            <h2>
+                Termos e Condições do Convite
+            </h2>
 
-            <h2>Atualização Disponível</h2>
-
-            <p>
-                A nova versão traz melhorias importantes:
-                <br><br>
-                Conversa em tempo real<br>
-                Altas risadas<br>
-                Conhecer a Giullia pessoalmente
-                <br><br>
-                Deseja instalar?
+            <p style="
+        color:#d8cbe0;
+        margin-top:15px;
+        margin-bottom:30px;
+    ">
+                Antes de prosseguir, é necessário concordar com os termos
+                estabelecidos pela equipe jurídica altamente imparcial deste projeto.
             </p>
+
+            <div style="
+        text-align:left;
+        background:rgba(255,255,255,.04);
+        border:1px solid rgba(255,255,255,.08);
+        border-radius:16px;
+        padding:25px;
+        line-height:2;
+    ">
+
+                <label style="display:block;">
+                    <input type="checkbox" checked disabled>
+                    Concordo que um café parece uma boa ideia (ou algo de sua preferência, não somos exigentes).
+                </label>
+
+                <label style="display:block;">
+                    <input type="checkbox" checked disabled>
+                    Concordo que ver o pôr do sol é objetivamente agradável.
+                </label>
+
+                <label style="display:block;">
+                    <input type="checkbox" checked disabled>
+                    Concordo que conversas ao vivo são mais eficientes que esperar respostas por dias.
+                </label>
+
+                <label style="display:block;">
+                    <input type="checkbox" checked disabled>
+                    Estou ciente de que risadas podem ocorrer durante a execução da atividade.
+                </label>
+
+                <label style="display:block;">
+                    <input type="checkbox" checked disabled>
+                    Li cuidadosamente todos os termos (ou pelo menos finjo que li).
+                </label>
+
+            </div>
+
+            <div style="
+        margin-top:25px;
+        padding:15px;
+        background:rgba(255,126,182,.1);
+        border:1px solid rgba(255,126,182,.2);
+        border-radius:12px;
+        color:#ffd6e8;
+        font-size:.95rem;
+    ">
+                ⚠️ Ao clicar em "Aceitar e Continuar", você concorda em considerar
+                seriamente a possibilidade de um datezinho no parque.
+            </div>
 
             <div class="buttons">
 
-                <button class="btn yes" onclick="aceitou()">
-                    Sim 😀
-                </button>
-
-                <button class="btn no" id="nao">
-                    Não 😅
+                <button class="btn yes" style="
+                width:100%;
+                padding:18px;
+                font-size:1.1rem;
+            " onclick="aceitou()">
+                    ✅ Aceitar e Continuar
                 </button>
 
             </div>
@@ -773,7 +1136,7 @@
 
         }
 
-        escrever();
+        // escrever();
 
         function abrirModal() {
             document.getElementById('modal').style.display = 'flex';
@@ -782,13 +1145,11 @@
         function aceitou() {
 
             document.querySelector('.modal-content').innerHTML = `
-<h2>🎉 Excelente!</h2>
+<h2>Excelente!</h2>
 <p>
-Parabéns!
 <br><br>
 Você reduziu o tempo médio de resposta de
-72 horas para aproximadamente
-72 segundos.
+72 horas para aproximadamente 72 segundos.
 <br><br>
 Agora só precisamos decidir o dia!
 </p>
@@ -827,6 +1188,39 @@ Agora só precisamos decidir o dia!
             nao.style.transform = `translate(${x}px,${y}px)`;
 
         });
+
+        function criarCoracaoFlutuante() {
+            const heart = document.createElement('div');
+
+            heart.className = 'floating-heart';
+
+            const emojis = ['💖', '💕', '💗', '💘', '💝'];
+
+            heart.innerHTML =
+                emojis[Math.floor(Math.random() * emojis.length)];
+
+            heart.style.left =
+                Math.random() * 100 + 'vw';
+
+            heart.style.fontSize =
+                (12 + Math.random() * 18) + 'px';
+
+            heart.style.animationDuration =
+                (8 + Math.random() * 8) + 's';
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 16000);
+        }
+
+        setInterval(criarCoracaoFlutuante, 700);
+
+        console.error("Falha crítica: Usuário desenvolvedor criou um site inteiro ao invés de simplesmente chamar para sair.");
+        console.error("ERRO FATAL: Botão 'Não' removido por motivos de segurança.");
+        console.log("Se você chegou até aqui, já temos algo em comum: curiosidade.");
+        console.log("Achei que você fosse olhar o código");
 
     </script>
 
